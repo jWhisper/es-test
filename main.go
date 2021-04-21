@@ -52,18 +52,19 @@ func main() {
 		fmt.Println("连接成功")
 	}
 
+	idxName := "report"
 	// 执行ES请求需要提供一个上下文对象
 	ctx := context.Background()
 
 	// 首先检测下weibo索引是否存在
-	exists, err := client.IndexExists("report").Do(ctx)
+	exists, err := client.IndexExists(idxName).Do(ctx)
 	if err != nil {
 		// Handle error
 		panic(err)
 	}
 	if !exists {
 		// weibo索引不存在，则创建一个
-		_, err := client.CreateIndex("report").BodyString(reportMapping).Do(ctx)
+		_, err := client.CreateIndex(idxName).BodyString(reportMapping).Do(ctx)
 		if err != nil {
 			// Handle error
 			panic(err)

@@ -93,7 +93,8 @@ func getReport(ctx context.Context, cli *elastic.Client) error {
 	if hits > 0 {
 		fmt.Println("has:", hits)
 		for _, hit := range res.Hits.Hits {
-			rp := new(indexRecord)
+			//rp := new(indexRecord)
+			rp := new(Data)
 			err = json.Unmarshal(hit.Source, rp)
 			if err != nil {
 				return err
