@@ -13,13 +13,13 @@ type indexRecord struct {
 
 // int64问题
 type Data struct {
-	Appid      int    `json:"appid,omitempty"`
-	Uid        int    `json:"uid,omitempty"`
-	Taskid     string `json:"taskid,omitempty"`
-	Streamname string `json:"streamname,omitempty"`
-	Timestamp  string `json:"timestamp,omitempty"`
-	Duration   int    `json:"duration,omitempty"`
-	Mediaurl   string `json:"mediaurl,omitempty"`
+	Appid      json.Number `json:"appid,omitempty"`
+	Uid        json.Number `json:"uid,omitempty"`
+	Taskid     string      `json:"taskid,omitempty"`
+	Streamname string      `json:"streamname,omitempty"`
+	Timestamp  json.Number `json:"timestamp,omitempty"`
+	Duration   json.Number `json:"duration,omitempty"`
+	Mediaurl   string      `json:"mediaurl,omitempty"`
 }
 
 func (rec *indexRecord) String() string {

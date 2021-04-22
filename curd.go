@@ -81,10 +81,16 @@ func insertReport(ctx context.Context, cli *elastic.Client) {
 
 func getReport(ctx context.Context, cli *elastic.Client) error {
 	// 根据id查询文档
-	//termQuery := elastic.NewTermQuery("user", "olivere")
+	appid := "23"
+	var mtime int64 = 1234566
+	tq1 := elastic.NewTermQuery("appid", &appid)
+	//tq2 := elastic.NewTermQuery("streamname", "")
+	tq3 := elastic.NewRangeQuery("timestamp").Gte(&mtime).Lte(nil)
+	boolQuery := elastic.NewBoolQuery().Must()
+	boolQuery.Must(tq1, tq3)
 	res, err := cli.Search().
 		Index("report").
-		//Query(termQuery).
+		Query(boolQuery).
 		Do(ctx)
 	if err != nil {
 		return err
